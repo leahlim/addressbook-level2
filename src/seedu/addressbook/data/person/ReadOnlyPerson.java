@@ -37,7 +37,7 @@ public interface ReadOnlyPerson {
      */
     default String getAsTextShowAll() {
         final StringBuilder builder = new StringBuilder();
-        final String detailIsPrivate = "(private) ";
+        /*final String detailIsPrivate = "(private) ";
         builder.append(getName())
                 .append(" Phone: ");
         if (getPhone().isPrivate()) {
@@ -53,8 +53,10 @@ public interface ReadOnlyPerson {
         if (getAddress().isPrivate()) {
             builder.append(detailIsPrivate);
         }
-        builder.append(getAddress())
-                .append(" Tags: ");
+        builder.append(getAddress())*/
+        builder.append(getName());
+        builder.append(getPrintableString(getPhone(), getEmail(), getAddress()))
+               .append(" Tags: ");
         for (Tag tag : getTags()) {
             builder.append(tag);
         }
@@ -68,17 +70,28 @@ public interface ReadOnlyPerson {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName());
         if (!getPhone().isPrivate()) {
-            builder.append(" Phone: ").append(getPhone());
+            builder.append(getPhone().getPrintableString());
         }
         if (!getEmail().isPrivate()) {
-            builder.append(" Email: ").append(getEmail());
+            builder.append(getEmail().getPrintableString());
         }
         if (!getAddress().isPrivate()) {
-            builder.append(" Address: ").append(getAddress());
+            builder.append(getAddress().getPrintableString());
         }
         builder.append(" Tags: ");
         for (Tag tag : getTags()) {
             builder.append(tag);
+        }
+        return builder.toString();
+    }
+    
+    /**
+     * Returns a concatenated version of the printable strings of each object.
+     */
+    default String getPrintableString(Printable... printables) {
+        final StringBuilder builder = new StringBuilder();
+        for (Printable p: printables) {
+            builder.append(p.getPrintableString());
         }
         return builder.toString();
     }
