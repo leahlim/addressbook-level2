@@ -5,6 +5,7 @@ import static seedu.addressbook.common.Messages.*;
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.tag.Tagging;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -114,6 +115,12 @@ public class TextUi {
     public void showToUser(String... message) {
         for (String m : message) {
             out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
+        }
+    }
+    
+    public void showAllTaggings(ArrayList<Tagging> allTaggings) {
+        for (Tagging tag: allTaggings) {
+            out.println(LINE_PREFIX + tag.toString() + LS + LINE_PREFIX);
         }
     }
 

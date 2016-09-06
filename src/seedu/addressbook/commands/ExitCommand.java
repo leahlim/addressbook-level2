@@ -1,5 +1,7 @@
 package seedu.addressbook.commands;
 
+import java.util.Arrays;
+
 /**
  * Terminates the program.
  */
